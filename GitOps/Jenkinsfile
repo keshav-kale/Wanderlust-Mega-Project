@@ -19,7 +19,7 @@ pipeline {
         stage('Git: Code Checkout') {
             steps {
                 script{
-                    code_checkout("https://github.com/Nihar9120/Wanderlust-Mega-Project.git","main")
+                    code_checkout("https://github.com/keshav-kale/Wanderlust-Mega-Project.git","main")
                 }
             }
         }
@@ -59,8 +59,8 @@ pipeline {
                 script{
                     withCredentials([gitUsernamePassword(credentialsId: 'Github-cred', gitToolName: 'Default')]) {
                         sh '''
-                        git config user.name "Nihar Ranjan Pradhan"
-                        git config user.email "niharranjanpradhan5799@gmail.com"
+                        git config user.name "Keshav Kale"
+                        git config user.email "kalekeshav.y@gmail.com"
 
                         echo "Checking repository status: "
                         git status
@@ -76,7 +76,7 @@ pipeline {
                         fi
                         
                         echo "Pushing changes to github: "
-                        git push https://github.com/Nihar9120/Wanderlust-Mega-Project.git main
+                        git push https://github.com/keshav-kale/Wanderlust-Mega-Project.git main
                     '''
                     }
                 }
@@ -87,7 +87,7 @@ pipeline {
         success {
             script {
                 emailext attachLog: true,
-                from: 'niharranjanpradhan5799@gmail.com',
+                from: 'kalekeshav.y@gmail.com',
                 subject: "Wanderlust Application has been updated and deployed - '${currentBuild.result}'",
                 body: """
                     <html>
@@ -104,14 +104,14 @@ pipeline {
                     </body>
                     </html>
             """,
-            to: 'niharranjanpradhan5799@gmail.com',
+            to: 'kalekeshav.y@gmail.com',
             mimeType: 'text/html'
             }
         }
       failure {
             script {
                 emailext attachLog: true,
-                from: 'niharranjanpradhan5799@gmail.com',
+                from: 'kalekeshav.y@gmail.com',
                 subject: "Wanderlust Application build failed - '${currentBuild.result}'",
                 body: """
                     <html>
@@ -125,7 +125,7 @@ pipeline {
                     </body>
                     </html>
             """,
-            to: 'niharranjanpradhan5799@gmail.com',
+            to: 'kalekeshav.y@gmail.com',
             mimeType: 'text/html'
             }
         }
